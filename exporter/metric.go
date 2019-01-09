@@ -2,10 +2,9 @@ package exporter
 
 import (
 	"fmt"
-	"sort"
 
 	"github.com/golang/protobuf/proto"
-	"github.com/prometheus/client_golang/prometheus"
+	prometheus "github.com/prometheus/client_golang/prometheus"
 	dto "github.com/prometheus/client_model/go"
 )
 
@@ -229,7 +228,7 @@ func makeLabelPairs(desc MetricDesc, labelValues []string) []*dto.LabelPair {
 		})
 	}
 	labelPairs = append(labelPairs, constLabels...)
-	sort.Sort(prometheus.LabelPairSorter(labelPairs))
+	//sort.Sort(prometheus.LabelPairSorter(labelPairs))
 	return labelPairs
 }
 
