@@ -423,13 +423,13 @@ func (m *MetricConfig) UnmarshalYAML(unmarshal func(interface{}) error) error {
 		return fmt.Errorf("missing help for metric %q", m.Name)
 	}
 	var qCount int
-	if m.QueryLiteral == "" {
+	if m.QueryLiteral != "" {
 		qCount++
 	}
-	if m.QueryRef == "" {
+	if m.QueryRef != "" {
 		qCount++
 	}
-	if m.QueryFile == "" {
+	if m.QueryFile != "" {
 		qCount++
 	}
 
