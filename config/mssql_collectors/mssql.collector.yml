@@ -101,6 +101,7 @@ metrics:
       - read
       - write
     query_ref: mssql_io_stall
+
   - metric_name: mssql_io_stall_total_seconds
     type: counter
     help: 'Total stall time in seconds per database.'
