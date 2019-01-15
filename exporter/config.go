@@ -352,7 +352,7 @@ func (c *CollectorConfig) UnmarshalYAML(unmarshal func(interface{}) error) error
 			metric.query = query
 			query.metrics = append(query.metrics, metric)
 		} else if metric.QueryFile != "" {
-			var queryFilePath = ".//config/sql/" + metric.QueryFile
+			var queryFilePath = strings.Replace(metric.QueryFile, "\n", "", -1)
 			queryBuffer, err := ioutil.ReadFile(queryFilePath)
 			if err != nil {
 				return fmt.Errorf("unable to load specified query_file %q in metric %q of collector %q", metric.QueryRef, metric.Name, c.Name)
