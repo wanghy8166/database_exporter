@@ -8,36 +8,30 @@ SELECT
   Z.free_bytes
 FROM
 (
-  SELECT
-    X.name                   as name,
-    SUM(nvl(X.free_bytes,0)) as free_bytes,
-    SUM(X.bytes)             as bytes,
-    SUM(X.max_bytes)         as max_bytes
-  FROM
-    (
-      SELECT
-        ddf.tablespace_name as name,
-        ddf.status as status,
-        ddf.bytes as bytes,
-        sum(coalesce(dfs.bytes, 0)) as free_bytes,
-        CASE
-          WHEN ddf.maxbytes = 0 THEN ddf.bytes
-          ELSE ddf.maxbytes
-        END as max_bytes
-      FROM
-        sys.dba_data_files ddf,
-        sys.dba_tablespaces dt,
-        sys.dba_free_space dfs
-      WHERE ddf.tablespace_name = dt.tablespace_name
-      AND ddf.file_id = dfs.file_id(+)
-      GROUP BY
-        ddf.tablespace_name,
-        ddf.file_name,
-        ddf.status,
-        ddf.bytes,
-        ddf.maxbytes
-    ) X
-  GROUP BY X.name
+    SELECT 
+        ddf.tablespace_name AS name,
+        SUM(ddf.bytes) AS bytes,
+        SUM(nvl(dfs.free_bytes,0)) AS free_bytes,
+        SUM(ddf.max_bytes) AS max_bytes
+    FROM (
+        SELECT 
+            tablespace_name,
+            bytes,
+            CASE
+                WHEN maxbytes = 0 
+                THEN bytes
+                ELSE maxbytes
+                END AS max_bytes
+        FROM sys.dba_data_files) ddf
+    INNER JOIN (
+        SELECT 
+            tablespace_name,
+            sum(bytes) as free_bytes
+        FROM sys.dba_free_space
+        GROUP BY tablespace_name) dfs
+    ON ddf.tablespace_name = dfs.tablespace_name
+    GROUP BY
+        ddf.tablespace_name
   UNION ALL
   SELECT
     Y.name                   as name,

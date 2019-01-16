@@ -90,21 +90,21 @@ metrics:
     type: gauge
     help: 'Gauge metric with count of sessions by status and type.'
     values: 
-      - count
+      - COUNT
     key_labels:
-      - status, type
-    query_file: |
-      ./config/oracle_collectors/sql/session_activity.sql
+      - status 
+      - type
+    query: |
+      SELECT status "status", type "type", COUNT(*) "COUNT"
+      FROM v$session GROUP BY status, type
 
   - metric_name: oracledb_wait_time_application
     type: gauge
     help: 'Gauge metric for Oracle application wait time.'
     values: 
       - AAS
-    key_labels:
-      - wait_class
     query: |
-      SELECT n.wait_class "wait_class" , round(m.time_waited/m.INTSIZE_CSEC,3) AAS 
+      SELECT round(m.time_waited/m.INTSIZE_CSEC,3) AAS 
       FROM v$waitclassmetric  m, v$system_wait_class n 
       WHERE m.wait_class_id=n.wait_class_id 
       AND n.wait_class = 'Application'
@@ -114,10 +114,8 @@ metrics:
     help: 'Gauge metric for Oracle commit wait time.'
     values: 
       - AAS
-    key_labels:
-      - wait_class
     query: |
-      SELECT n.wait_class "wait_class", round(m.time_waited/m.INTSIZE_CSEC,3) AAS 
+      SELECT round(m.time_waited/m.INTSIZE_CSEC,3) AAS 
       FROM v$waitclassmetric  m, v$system_wait_class n 
       WHERE m.wait_class_id=n.wait_class_id 
       AND n.wait_class = 'Commit'
@@ -127,10 +125,8 @@ metrics:
     help: 'Gauge metric for Oracle concurrency wait time.'
     values: 
       - AAS
-    key_labels:
-      - wait_class
     query: |
-      SELECT n.wait_class "wait_class", round(m.time_waited/m.INTSIZE_CSEC,3) AAS 
+      SELECT round(m.time_waited/m.INTSIZE_CSEC,3) AAS 
       FROM v$waitclassmetric  m, v$system_wait_class n 
       WHERE m.wait_class_id=n.wait_class_id 
       AND n.wait_class = 'Concurrency'
@@ -140,10 +136,8 @@ metrics:
     help: 'Gauge metric for Oracle configuration wait time.'
     values: 
       - AAS
-    key_labels:
-      - wait_class
     query: |
-      SELECT n.wait_class "wait_class", round(m.time_waited/m.INTSIZE_CSEC,3) AAS 
+      SELECT round(m.time_waited/m.INTSIZE_CSEC,3) AAS 
       FROM v$waitclassmetric  m, v$system_wait_class n 
       WHERE m.wait_class_id=n.wait_class_id 
       AND n.wait_class = 'Configuration'
@@ -153,10 +147,8 @@ metrics:
     help: 'Gauge metric for Oracle network wait time.'
     values: 
       - AAS
-    key_labels:
-      - wait_class
     query: |
-      SELECT n.wait_class "wait_class", round(m.time_waited/m.INTSIZE_CSEC,3) AAS 
+      SELECT round(m.time_waited/m.INTSIZE_CSEC,3) AAS 
       FROM v$waitclassmetric  m, v$system_wait_class n 
       WHERE m.wait_class_id=n.wait_class_id 
       AND n.wait_class = 'Network'
@@ -166,10 +158,8 @@ metrics:
     help: 'Gauge metric for Oracle other wait time.'
     values: 
       - AAS
-    key_labels:
-      - WAIT_CLASS
     query: |
-      SELECT n.wait_class, round(m.time_waited/m.INTSIZE_CSEC,3) AAS 
+      SELECT round(m.time_waited/m.INTSIZE_CSEC,3) AAS 
       FROM v$waitclassmetric  m, v$system_wait_class n 
       WHERE m.wait_class_id=n.wait_class_id 
       AND n.wait_class = 'Other'
@@ -179,10 +169,8 @@ metrics:
     help: 'Gauge metric for Oracle Scheduler wait time.'
     values: 
       - AAS
-    key_labels:
-      - wait_class
     query: |
-      SELECT n.wait_class "wait_class", round(m.time_waited/m.INTSIZE_CSEC,3) AAS 
+      SELECT round(m.time_waited/m.INTSIZE_CSEC,3) AAS 
       FROM v$waitclassmetric  m, v$system_wait_class n 
       WHERE m.wait_class_id=n.wait_class_id 
       AND n.wait_class = 'Scheduler'
@@ -192,10 +180,8 @@ metrics:
     help: 'Gauge metric for Oracle System I/O wait time.'
     values: 
       - AAS
-    key_labels:
-      - WAIT_CLASS
     query: |
-      SELECT n.wait_class, round(m.time_waited/m.INTSIZE_CSEC,3) AAS 
+      SELECT round(m.time_waited/m.INTSIZE_CSEC,3) AAS 
       FROM v$waitclassmetric  m, v$system_wait_class n 
       WHERE m.wait_class_id=n.wait_class_id 
       AND n.wait_class = 'System I/O'
@@ -205,10 +191,8 @@ metrics:
     help: 'Gauge metric for Oracle User I/O wait time.'
     values: 
       - AAS
-    key_labels:
-      - wait_class
     query: |
-      SELECT n.wait_class "wait_class", round(m.time_waited/m.INTSIZE_CSEC,3) AAS 
+      SELECT round(m.time_waited/m.INTSIZE_CSEC,3) AAS 
       FROM v$waitclassmetric  m, v$system_wait_class n 
       WHERE m.wait_class_id=n.wait_class_id 
       AND n.wait_class = 'User I/O'
