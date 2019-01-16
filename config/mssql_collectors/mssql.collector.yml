@@ -11,7 +11,16 @@ collector_name: mssql_metrics
 #min_interval: 0s
 
 metrics:
-      
+
+  - metric_name: mssql_database_size
+    type: gauge
+    help: 'List of databases and sizes'
+    key_labels:
+      - db
+    values: [database_size]
+    query_file: |
+      ./config/mssql_collectors/sql/mssql_sp_databases.sql
+
   - metric_name: mssql_local_time_seconds
     type: gauge
     help: 'Local time in seconds since epoch (Unix time).'
