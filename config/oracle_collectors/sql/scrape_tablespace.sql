@@ -1,11 +1,11 @@
 SELECT
-  Z.name,
+  Z.name AS "name",
   dt.status,
   dt.contents,
   dt.extent_management,
-  Z.bytes,
-  Z.max_bytes,
-  Z.free_bytes
+  Z.bytes AS "bytes",
+  Z.max_bytes  AS "max_bytes",
+  Z.free_bytes AS "free_bytes"
 FROM
 (
     SELECT 
