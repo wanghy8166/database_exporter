@@ -74,6 +74,7 @@ func ExporterHandlerFor(exporter exporter.Exporter) http.Handler {
 func contextFor(req *http.Request, exporter exporter.Exporter) (context.Context, context.CancelFunc) {
 	timeout := time.Duration(0)
 	configTimeout := time.Duration(exporter.Config().Globals.ScrapeTimeout)
+	//configTimeout := time.Duration(90)
 	// If a timeout is provided in the Prometheus header, use it.
 	v := req.Header.Get("X-Prometheus-Scrape-Timeout-Seconds")
 	if v != "" {
