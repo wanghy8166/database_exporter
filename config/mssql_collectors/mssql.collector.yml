@@ -78,6 +78,17 @@ metrics:
       FROM sys.dm_os_performance_counters WITH (NOLOCK)
       WHERE counter_name = 'Page life expectancy'
 
+  - metric_name: mssql_expensive_queries_gauge
+    type: gauge
+    help: 'Expensive queries as reported by Performance Data.'
+    key_labels:
+      - vcOrderBy
+      - biExecutionCount
+      - xQueryText
+    values: [biTotalElapsedTime]
+    query_file: 
+      ./config/mssql_collectors/sql/mssql_expensive_queries.sql
+
   - metric_name: mssql_batch_requests
     type: counter
     help: 'Number of command batches received.'
@@ -197,4 +208,7 @@ queries:
         memory_utilization_percentage,
         page_fault_count
       FROM sys.dm_os_process_memory
+
+      
+
       

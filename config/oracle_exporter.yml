@@ -2,10 +2,10 @@
 global:
   # Subtracted from Prometheus' scrape_timeout to give us some headroom and prevent Prometheus from timing out first.
   scrape_timeout_offset: 1s
-  scrape_timeout: 90s
+  scrape_timeout: 180s
 
   # Minimum interval between collector runs: by default (0s) collectors are executed on every scrape.
-  min_interval: 180s
+  min_interval: 90s
   # Maximum number of open connections to any one target. Metric queries will run concurrently on multiple connections,
   # as will concurrent scrapes.
   max_connections: 6
