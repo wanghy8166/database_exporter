@@ -191,18 +191,6 @@ metrics:
     query_file: |
       ./config/oracle_collectors/sql/scrape_tablespace.sql
 
-  - metric_name: do_status_test
-    type: gauge
-    help: 'Gauge metric of status counts.'
-    values: 
-      - row_count
-    key_labels:
-      - facility_alias_id
-      - do_status
-      - tag
-    query_file: |
-      ./config/oracle_collectors/sql/do_status_test.sql
-
   - metric_name: oracledb_tablespace_max_bytes
     type: gauge
     help: 'Gauge metric of tablespaces max bytes in Oracle.'
