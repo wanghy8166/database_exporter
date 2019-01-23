@@ -71,6 +71,9 @@ You will find ready to use "standard" DBMS-specific collector definitions in the
 definitions and metric additions if you think they could be more widely useful, even if they are merely different takes
 on already covered DBMSs.
 
+**`Oracle`**
+Oracle may require additional libraries to be installed on the machine running database_exporter. This can generally be done by installing Oracle Instand Client as found on the [`Oracle Website`](https://www.oracle.com/technetwork/database/database-technologies/instant-client/downloads/index.html)
+
 **`./database_exporter.yml`**
 
 ```yaml

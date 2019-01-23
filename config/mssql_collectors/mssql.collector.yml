@@ -78,16 +78,35 @@ metrics:
       FROM sys.dm_os_performance_counters WITH (NOLOCK)
       WHERE counter_name = 'Page life expectancy'
 
-  - metric_name: mssql_expensive_queries_gauge
+  - metric_name: mssql_expensive_queries_by_duration
     type: gauge
-    help: 'Expensive queries as reported by Performance Data.'
+    help: 'Expensive queries as reported by Performance Data duration.'
     key_labels:
-      - vcOrderBy
       - biExecutionCount
       - xQueryText
     values: [biTotalElapsedTime]
     query_file: 
-      ./config/mssql_collectors/sql/mssql_expensive_queries.sql
+      ./config/mssql_collectors/sql/mssql_expensive_queries_by_duration.sql
+
+  - metric_name: mssql_expensive_queries_by_cpu
+    type: gauge
+    help: 'Expensive queries as reported by Performance Data CPU usage.'
+    key_labels:
+      - biExecutionCount
+      - xQueryText
+    values: [biAvgWorkerTime]
+    query_file: 
+      ./config/mssql_collectors/sql/mssql_expensive_queries_by_cpu.sql
+
+  - metric_name: mssql_expensive_queries_by_io
+    type: gauge
+    help: 'Expensive queries as reported by Performance Data IO usage.'
+    key_labels:
+      - biExecutionCount
+      - xQueryText
+    values: [biAvgIO]
+    query_file: 
+      ./config/mssql_collectors/sql/mssql_expensive_queries_by_io.sql
 
   - metric_name: mssql_batch_requests
     type: counter
