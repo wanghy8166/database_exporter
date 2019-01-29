@@ -17,7 +17,7 @@
   "gnetId": 9336,
   "graphTooltip": 0,
   "id": 381,
-  "iteration": 1548772155522,
+  "iteration": 1548780910004,
   "links": [],
   "panels": [
     {
@@ -892,454 +892,87 @@
       "valueName": "avg"
     },
     {
+      "aliasColors": {},
+      "breakPoint": "50%",
       "cacheTimeout": null,
-      "colorBackground": false,
-      "colorValue": false,
-      "colors": [
-        "#fce2de",
-        "rgb(255, 85, 0)",
-        "rgba(50, 172, 45, 0.97)"
-      ],
-      "datasource": "$datasource",
-      "description": "Total physical memory",
-      "editable": true,
-      "error": false,
-      "format": "none",
-      "gauge": {
-        "maxValue": 100,
-        "minValue": 0,
-        "show": false,
-        "thresholdLabels": false,
-        "thresholdMarkers": true
+      "combine": {
+        "label": "Others",
+        "threshold": 0
       },
+      "datasource": "$datasource",
+      "fontSize": "80%",
+      "format": "decmbytes",
       "gridPos": {
         "h": 6,
-        "w": 3,
+        "w": 6,
         "x": 5,
         "y": 5
       },
-      "hideTimeOverride": false,
-      "id": 74,
+      "id": 131,
       "interval": null,
-      "links": [],
-      "mappingType": 1,
-      "mappingTypes": [
-        {
-          "name": "value to text",
-          "value": 1
-        },
-        {
-          "name": "range to text",
-          "value": 2
-        }
-      ],
-      "maxDataPoints": 100,
-      "nullPointMode": "null",
-      "nullText": null,
-      "postfix": "MB",
-      "postfixFontSize": "50%",
-      "prefix": "",
-      "prefixFontSize": "50%",
-      "rangeMaps": [
-        {
-          "from": "null",
-          "text": "N/A",
-          "to": "null"
-        }
-      ],
-      "sparkline": {
-        "fillColor": "rgba(31, 118, 189, 0.18)",
-        "full": false,
-        "lineColor": "rgb(31, 120, 193)",
-        "show": false
+      "legend": {
+        "show": true,
+        "values": true
       },
-      "tableColumn": "",
+      "legendType": "Right side",
+      "links": [],
+      "maxDataPoints": 3,
+      "nullPointMode": "connected",
+      "pieType": "pie",
+      "strokeWidth": 1,
       "targets": [
         {
-          "alias": "",
-          "dsType": "influxdb",
-          "expr": "mssql_os_memory{state=\"available\", instance=\"$instance\"} / 1048576",
+          "expr": "mssql_os_page_file{instance=\"$instance\"} / 1048576",
           "format": "time_series",
-          "groupBy": [],
-          "intervalFactor": 2,
-          "measurement": "Performance metrics",
-          "policy": "default",
-          "query": "SELECT \"Point In Time Recovery\" FROM \"Performance metrics\" WHERE \"servername\" =~ /$Instance$/ AND \"type\" = 'Performance metrics' AND $timeFilter",
-          "refId": "A",
-          "resultFormat": "time_series",
-          "select": [
-            [
-              {
-                "params": [
-                  "Point In Time Recovery"
-                ],
-                "type": "field"
-              }
-            ]
-          ],
-          "step": 60,
-          "tags": [
-            {
-              "key": "servername",
-              "operator": "=~",
-              "value": "/$Instance$/"
-            },
-            {
-              "condition": "AND",
-              "key": "type",
-              "operator": "=",
-              "value": "Performance metrics"
-            }
-          ]
+          "intervalFactor": 1,
+          "legendFormat": "{{state}}",
+          "refId": "B"
         }
       ],
-      "thresholds": "",
-      "title": "Physical memory",
-      "type": "singlestat",
-      "valueFontSize": "80%",
-      "valueMaps": [],
+      "title": "Page File",
+      "type": "grafana-piechart-panel",
       "valueName": "current"
     },
     {
+      "aliasColors": {},
+      "breakPoint": "50%",
       "cacheTimeout": null,
-      "colorBackground": false,
-      "colorValue": false,
-      "colors": [
-        "rgba(32, 33, 58, 0.9)",
-        "rgba(237, 129, 40, 0.89)",
-        "rgba(50, 172, 45, 0.97)"
-      ],
-      "datasource": "$datasource",
-      "description": "Available physical memory",
-      "editable": true,
-      "error": false,
-      "format": "none",
-      "gauge": {
-        "maxValue": 100,
-        "minValue": 0,
-        "show": false,
-        "thresholdLabels": false,
-        "thresholdMarkers": true
+      "combine": {
+        "label": "Others",
+        "threshold": 0
       },
+      "datasource": "$datasource",
+      "fontSize": "80%",
+      "format": "decmbytes",
       "gridPos": {
         "h": 6,
-        "w": 3,
-        "x": 8,
-        "y": 5
-      },
-      "id": 84,
-      "interval": null,
-      "links": [],
-      "mappingType": 1,
-      "mappingTypes": [
-        {
-          "name": "value to text",
-          "value": 1
-        },
-        {
-          "name": "range to text",
-          "value": 2
-        }
-      ],
-      "maxDataPoints": 100,
-      "nullPointMode": "null",
-      "nullText": null,
-      "postfix": "MB",
-      "postfixFontSize": "50%",
-      "prefix": "",
-      "prefixFontSize": "50%",
-      "rangeMaps": [
-        {
-          "from": "null",
-          "text": "N/A",
-          "to": "null"
-        }
-      ],
-      "sparkline": {
-        "fillColor": "rgba(31, 118, 189, 0.18)",
-        "full": true,
-        "lineColor": "rgb(31, 120, 193)",
-        "show": true
-      },
-      "tableColumn": "",
-      "targets": [
-        {
-          "alias": "",
-          "dsType": "influxdb",
-          "expr": "mssql_os_memory{state=\"available\", instance=\"$instance\"} / 1048576",
-          "format": "time_series",
-          "groupBy": [],
-          "intervalFactor": 2,
-          "measurement": "Recovery Model FULL",
-          "policy": "default",
-          "query": "SELECT \"total\" FROM \"Recovery Model FULL\" WHERE \"servername\" =~ /$Instance$/ AND \"type\" = 'Database properties' AND $timeFilter",
-          "refId": "A",
-          "resultFormat": "time_series",
-          "select": [
-            [
-              {
-                "params": [
-                  "total"
-                ],
-                "type": "field"
-              }
-            ]
-          ],
-          "step": 60,
-          "tags": [
-            {
-              "key": "servername",
-              "operator": "=~",
-              "value": "/$Instance$/"
-            },
-            {
-              "condition": "AND",
-              "key": "type",
-              "operator": "=",
-              "value": "Database properties"
-            }
-          ]
-        }
-      ],
-      "thresholds": "",
-      "title": "Available Memory",
-      "type": "singlestat",
-      "valueFontSize": "80%",
-      "valueMaps": [
-        {
-          "op": "=",
-          "text": "N/A",
-          "value": "null"
-        }
-      ],
-      "valueName": "current"
-    },
-    {
-      "cacheTimeout": null,
-      "colorBackground": false,
-      "colorValue": false,
-      "colors": [
-        "rgba(32, 33, 58, 0.9)",
-        "rgba(237, 129, 40, 0.89)",
-        "rgba(50, 172, 45, 0.97)"
-      ],
-      "datasource": "$datasource",
-      "description": "Total page file in KB",
-      "editable": true,
-      "error": false,
-      "format": "none",
-      "gauge": {
-        "maxValue": 100,
-        "minValue": 0,
-        "show": false,
-        "thresholdLabels": false,
-        "thresholdMarkers": true
-      },
-      "gridPos": {
-        "h": 6,
-        "w": 3,
+        "w": 6,
         "x": 11,
         "y": 5
       },
-      "id": 85,
+      "id": 129,
       "interval": null,
-      "links": [],
-      "mappingType": 1,
-      "mappingTypes": [
-        {
-          "name": "value to text",
-          "value": 1
-        },
-        {
-          "name": "range to text",
-          "value": 2
-        }
-      ],
-      "maxDataPoints": 100,
-      "nullPointMode": "null",
-      "nullText": null,
-      "postfix": "MB",
-      "postfixFontSize": "50%",
-      "prefix": "",
-      "prefixFontSize": "50%",
-      "rangeMaps": [
-        {
-          "from": "null",
-          "text": "N/A",
-          "to": "null"
-        }
-      ],
-      "sparkline": {
-        "fillColor": "rgba(31, 118, 189, 0.18)",
-        "full": false,
-        "lineColor": "rgb(31, 120, 193)",
-        "show": false
+      "legend": {
+        "show": true,
+        "values": true
       },
-      "tableColumn": "",
+      "legendType": "Right side",
+      "links": [],
+      "maxDataPoints": 3,
+      "nullPointMode": "connected",
+      "pieType": "pie",
+      "strokeWidth": 1,
       "targets": [
         {
-          "alias": "",
-          "dsType": "influxdb",
-          "expr": "sum(mssql_os_page_file{instance=\"$instance\"}) / 1048576",
+          "expr": "mssql_os_memory{instance=\"$instance\"} / 1048576",
           "format": "time_series",
-          "groupBy": [],
-          "intervalFactor": 2,
-          "measurement": "Recovery Model BULK_LOGGED",
-          "policy": "default",
-          "query": "SELECT \"total\" FROM \"Recovery Model BULK_LOGGED\" WHERE \"servername\" =~ /$Instance$/ AND \"type\" = 'Database properties' AND $timeFilter",
-          "refId": "A",
-          "resultFormat": "time_series",
-          "select": [
-            [
-              {
-                "params": [
-                  "total"
-                ],
-                "type": "field"
-              }
-            ]
-          ],
-          "step": 60,
-          "tags": [
-            {
-              "key": "servername",
-              "operator": "=~",
-              "value": "/$Instance$/"
-            },
-            {
-              "condition": "AND",
-              "key": "type",
-              "operator": "=",
-              "value": "Database properties"
-            }
-          ]
+          "intervalFactor": 1,
+          "legendFormat": "{{state}}",
+          "refId": "A"
         }
       ],
-      "thresholds": "",
-      "title": "Total Page File",
-      "type": "singlestat",
-      "valueFontSize": "80%",
-      "valueMaps": [
-        {
-          "op": "=",
-          "text": "N/A",
-          "value": "null"
-        }
-      ],
-      "valueName": "current"
-    },
-    {
-      "cacheTimeout": null,
-      "colorBackground": false,
-      "colorValue": false,
-      "colors": [
-        "rgba(32, 33, 58, 0.9)",
-        "rgba(237, 129, 40, 0.89)",
-        "rgba(50, 172, 45, 0.97)"
-      ],
-      "datasource": "$datasource",
-      "description": "Available page file",
-      "editable": true,
-      "error": false,
-      "format": "none",
-      "gauge": {
-        "maxValue": 100,
-        "minValue": 0,
-        "show": false,
-        "thresholdLabels": false,
-        "thresholdMarkers": true
-      },
-      "gridPos": {
-        "h": 6,
-        "w": 3,
-        "x": 14,
-        "y": 5
-      },
-      "id": 86,
-      "interval": null,
-      "links": [],
-      "mappingType": 1,
-      "mappingTypes": [
-        {
-          "name": "value to text",
-          "value": 1
-        },
-        {
-          "name": "range to text",
-          "value": 2
-        }
-      ],
-      "maxDataPoints": 100,
-      "nullPointMode": "null",
-      "nullText": null,
-      "postfix": "MB",
-      "postfixFontSize": "50%",
-      "prefix": "",
-      "prefixFontSize": "50%",
-      "rangeMaps": [
-        {
-          "from": "null",
-          "text": "N/A",
-          "to": "null"
-        }
-      ],
-      "sparkline": {
-        "fillColor": "rgba(31, 118, 189, 0.18)",
-        "full": true,
-        "lineColor": "rgb(31, 120, 193)",
-        "show": true
-      },
-      "tableColumn": "",
-      "targets": [
-        {
-          "alias": "",
-          "dsType": "influxdb",
-          "expr": "mssql_os_page_file{state=\"available\",instance=\"$instance\"} / 1048576",
-          "format": "time_series",
-          "groupBy": [],
-          "intervalFactor": 2,
-          "measurement": "Recovery Model SIMPLE",
-          "policy": "default",
-          "query": "SELECT \"total\" FROM \"Recovery Model SIMPLE\" WHERE \"servername\" =~ /$Instance$/ AND \"type\" = 'Database properties' AND $timeFilter",
-          "refId": "A",
-          "resultFormat": "time_series",
-          "select": [
-            [
-              {
-                "params": [
-                  "total"
-                ],
-                "type": "field"
-              }
-            ]
-          ],
-          "step": 60,
-          "tags": [
-            {
-              "key": "servername",
-              "operator": "=~",
-              "value": "/$Instance$/"
-            },
-            {
-              "condition": "AND",
-              "key": "type",
-              "operator": "=",
-              "value": "Database properties"
-            }
-          ]
-        }
-      ],
-      "thresholds": "",
-      "title": "Available Page File",
-      "type": "singlestat",
-      "valueFontSize": "80%",
-      "valueMaps": [
-        {
-          "op": "=",
-          "text": "N/A",
-          "value": "null"
-        }
-      ],
+      "title": "Physical Memory",
+      "type": "grafana-piechart-panel",
       "valueName": "current"
     },
     {
@@ -2546,5 +2179,5 @@
   "timezone": "browser",
   "title": "Prometheus MSSQL Exporter",
   "uid": "TocpL9Lizd",
-  "version": 23
+  "version": 34
 }
