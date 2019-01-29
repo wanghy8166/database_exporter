@@ -16,8 +16,8 @@
   "editable": true,
   "gnetId": 9336,
   "graphTooltip": 0,
-  "id": 1,
-  "iteration": 1548265167948,
+  "id": 381,
+  "iteration": 1548772155522,
   "links": [],
   "panels": [
     {
@@ -1696,7 +1696,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "Prometheus",
+      "datasource": "$datasource",
       "description": "Wait time (ms) of stall since last restart",
       "fill": 1,
       "gridPos": {
@@ -1784,7 +1784,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "Prometheus",
+      "datasource": "$datasource",
       "description": "Wait time (ms) of stall since last restart",
       "fill": 1,
       "gridPos": {
@@ -2420,8 +2420,8 @@
     "list": [
       {
         "current": {
-          "text": "Prometheus",
-          "value": "Prometheus"
+          "text": "Promethus - Automation",
+          "value": "Promethus - Automation"
         },
         "hide": 0,
         "label": "Datasource",
@@ -2436,10 +2436,10 @@
       {
         "allValue": null,
         "current": {
-          "text": "database_exporter_mssql_test",
-          "value": "database_exporter_mssql_test"
+          "text": "sql_server_monitor_ms",
+          "value": "sql_server_monitor_ms"
         },
-        "datasource": "Prometheus",
+        "datasource": "$datasource",
         "definition": "",
         "hide": 0,
         "includeAll": false,
@@ -2462,10 +2462,10 @@
         "allFormat": "glob",
         "allValue": null,
         "current": {
-          "text": "depc02tc2t0gtdy:9286",
-          "value": "depc02tc2t0gtdy:9286"
+          "text": "ms16-p-0330.dcsg.com:9285",
+          "value": "ms16-p-0330.dcsg.com:9285"
         },
-        "datasource": "Prometheus",
+        "datasource": "$datasource",
         "definition": "up{job=\"$job\"}",
         "hide": 0,
         "includeAll": false,
@@ -2488,10 +2488,11 @@
       {
         "allValue": null,
         "current": {
-          "text": "master",
-          "value": "master"
+          "isNone": true,
+          "text": "None",
+          "value": ""
         },
-        "datasource": "Prometheus",
+        "datasource": "$datasource",
         "definition": "mssql_database_size{instance=\"$instance\"}",
         "hide": 0,
         "includeAll": false,
@@ -2545,5 +2546,5 @@
   "timezone": "browser",
   "title": "Prometheus MSSQL Exporter",
   "uid": "TocpL9Lizd",
-  "version": 113
+  "version": 23
 }
