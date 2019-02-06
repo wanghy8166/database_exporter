@@ -152,6 +152,7 @@ of DSNs for the latter two drivers in order for this to work:
 
 DB | Database Exporter expected DSN | Driver sees
 :---|:---|:---
+DB2 | `db2://DATABASE=database;HOSTNAME=hostname;PORT=port;PROTOCOL=TCPIP;UID=user;PWD=password` | `DATABASE=database;HOSTNAME=hostname;PORT=port;PROTOCOL=TCPIP;UID=user;PWD=password`
 MySQL | `mysql://user:passw@protocol(host:port)/dbname` | `user:passw@protocol(host:port)/dbname`
 Oracle | `oracle://user/password@host:port/sid` | `user/password@host:port/sid`
 PostgreSQL | `postgres://user:passw@host:port/dbname` | *unchanged*
