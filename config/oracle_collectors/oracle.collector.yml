@@ -8,6 +8,17 @@ collector_name: oracledb_metrics
 #min_interval: 0s
 
 metrics:
+  - metric_name: oracledb_blocking_locks
+    type: gauge
+    help: 'Oracle DB Blocking Locks'
+    values:
+      - blocking_count
+    key_labels:
+      - blocking_session
+      - blocked_session
+    query_file: |
+      ./config/oracle_collectors/sql/blocking_locks.sql
+
   - metric_name: oracledb_metric
     type: gauge
     help: 'Oracle DB v$metric'
