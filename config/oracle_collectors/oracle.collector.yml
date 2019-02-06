@@ -196,7 +196,7 @@ metrics:
     type: gauge
     help: 'Gauge metric of tablespaces bytes in Oracle.'
     values: 
-      - bytes
+      - bytes_used
     key_labels:
       - name
     query_file: |
@@ -216,7 +216,7 @@ metrics:
     type: gauge
     help: 'Gauge metric of tablespaces free bytes in Oracle.'
     values: 
-      - free_bytes
+      - bytes_free
     key_labels:
       - name
     query_file: |
