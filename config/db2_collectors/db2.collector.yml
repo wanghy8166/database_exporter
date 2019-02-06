@@ -1,0 +1,23 @@
+# A collector defining standard metrics for Oracle Database Server.
+#
+#
+
+collector_name: db2_metrics
+
+# Similar to global.min_interval, but applies to the queries defined by this collector only.
+#min_interval: 0s
+
+metrics:
+  - metric_name: db2_test_metric
+    type: gauge
+    help: 'db2 Test Metric'
+    values:
+      - AVAILQUANTITY
+    key_labels:
+      - CATENTRY_ID
+    query: |
+      SELECT C.CATENTRY_ID AS CATENTRY_ID,I.AVAILQUANTITY AS AVAILQUANTITY,I.AVAILTIME,I.LASTUPDATE,I.STORE_ID 
+      FROM CATENTRY C , INVAVL I 
+      WHERE C.CATENTRY_ID=I.CATENTRY_ID AND C.PARTNUMBER='90023450'
+
+
