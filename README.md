@@ -10,7 +10,7 @@ Database agnostic SQL exporter for [Prometheus](https://prometheus.io).
 ## Overview
 
 Database Exporter is a configuration driven exporter that exposes metrics gathered from DBMSs, for use by the Prometheus
-monitoring system. Out of the box, it provides support for MySQL, PostgreSQL, Oracle DB, Microsoft SQL Server and Clickhouse, but
+monitoring system. Out of the box, it provides support for MySQL, PostgreSQL, Oracle DB, Microsoft SQL Server, DB2 and Clickhouse, but
 any DBMS for which a Go driver is available may be monitored after rebuilding the binary with the DBMS driver included.
 
 The collected metrics and the queries that produce them are entirely configuration defined. SQL queries are grouped into
@@ -73,6 +73,12 @@ on already covered DBMSs.
 
 **`Oracle`**
 Oracle may require additional libraries to be installed on the machine running database_exporter. This can generally be done by installing Oracle Instand Client as found on the [`Oracle Website`](https://www.oracle.com/technetwork/database/database-technologies/instant-client/downloads/index.html)
+
+**`DB2`**
+DB2 install depends on the https://github.com/ibmdb/go_ibm_db driver, DSN format (passed to the driver with the `db2://`` prefix):
+   db2://"DATABASE=database;HOSTNAME=hostname;PORT=port;PROTOCOL=TCPIP;UID=user;PWD=password;
+   DB2 connection depends on db2cli which must be manually added. See directions located at https://github.com/ibmdb/go_ibm_db for installation.
+
 
 **`./database_exporter.yml`**
 
@@ -158,8 +164,7 @@ Couchbase cluster | `n1ql://http://host:port/@creds=[{"user":"Administrator","pa
 
 ## Why It Exists
 
-Database exporter started from [SQL Exporter](https://github.com/free/sql_exporter) which started off as an exporter for Microsoft SQL Server, for which no reliable exporters exist. But what is the point of a configuration driven Database exporter, if you're going to use it along with 2 more exporters with wholly
-different world views and configurations, because you also have MySQL, Oracle and PostgreSQL instances to monitor?
+Database exporter started from [SQL Exporter](https://github.com/free/sql_exporter) which started off as an exporter for Microsoft SQL Server, for which no reliable exporters exist. Additional support was added for MySQL, Oracle, DB2, Clickhouse and PostgreSQL. 
 
 A couple of alternative database agnostic exporters are available:
 [database_exporter](https://github.com/justwatchcom/database_exporter)

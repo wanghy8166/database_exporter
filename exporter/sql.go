@@ -12,6 +12,7 @@ import (
 	_ "github.com/denisenkom/go-mssqldb" // register the MS-SQL driver
 	_ "github.com/go-goracle/goracle"    // register the Oracle DB driver
 	_ "github.com/go-sql-driver/mysql"   // register the MySQL driver
+	_ "github.com/ibmdb/go_ibm_db"       // register the DB2 driver
 	_ "github.com/kshvakov/clickhouse"   // register the ClickHouse driver
 	_ "github.com/lib/pq"                // register the PostgreSQL driver
 	_ "github.com/mattn/go-sqlite3"      // register the SQLite3 driver
@@ -55,6 +56,8 @@ import (
 //   oracle://user/passw@service_name
 //   oracle://username@[//]host[:port][/service_name][:server][/instance_name]
 //   oracle://user/pass@(DESCRIPTION=(ADDRESS_LIST=(ADDRESS=(PROTOCOL=tcp)(HOST=hostname)(PORT=port)))(CONNECT_DATA=(SERVICE_NAME=sn)))
+//   Oracle may require additional libraries to be installed on the machine running database_exporter. This can generally be done by
+//   installing Oracle Instand Client as found on the [`Oracle Website`](https://www.oracle.com/technetwork/database/database-technologies/instant-client/downloads/index.html)
 //
 // SQLite3
 //
@@ -65,11 +68,17 @@ import (
 //
 // Couchbase
 //
-// Using the github.com/couchbase/go_n1ql driver, DSN format (passed to the driver with the `n1ql://`` prefix):
+// Using the https://github.com/couchbase/go_n1ql driver, DSN format (passed to the driver with the `n1ql://`` prefix):
 //   Connecting to the instance:
 //   n1ql://localhost:8093@creds=[{"user":"Administrator","pass":"admin123"}]@timeout=10s
 //   Connecting to the cluster:
 //   n1ql://http://localhost:9000/@creds=[{"user":"Administrator","pass":"admin123"}]@timeout=10s
+//
+//
+// DB2
+// Using the https://github.com/ibmdb/go_ibm_db driver, DSN format (passed to the driver with the `db2://`` prefix):
+//   db2://"DATABASE=database;HOSTNAME=hostname;PORT=port;PROTOCOL=TCPIP;UID=user;PWD=password;
+//   DB2 connection depends on db2cli which must be manually added. See directions located at https://github.com/ibmdb/go_ibm_db for installation.
 //
 func OpenConnection(ctx context.Context, logContext, dsn string, maxConns, maxIdleConns int) (*sql.DB, error) {
 	// Extract driver name from DSN.
@@ -93,6 +102,9 @@ func OpenConnection(ctx context.Context, logContext, dsn string, maxConns, maxId
 	case "n1ql":
 		dsn = strings.TrimPrefix(dsn, "n1ql://")
 		dsn = strings.Split(dsn, "@")[0]
+	case "db2":
+		dsn = strings.TrimPrefix(dsn, "db2://")
+		driver = "go_ibm_db"
 	}
 
 	// Open the DB handle in a separate goroutine so we can terminate early if the context closes.

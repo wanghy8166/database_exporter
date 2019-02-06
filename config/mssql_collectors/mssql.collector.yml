@@ -78,35 +78,26 @@ metrics:
       FROM sys.dm_os_performance_counters WITH (NOLOCK)
       WHERE counter_name = 'Page life expectancy'
 
-  - metric_name: mssql_expensive_queries_by_duration
+  - metric_name: mssql_cpu_usage_sql
     type: gauge
-    help: 'Expensive queries as reported by Performance Data duration.'
-    key_labels:
-      - biExecutionCount
-      - xQueryText
-    values: [biTotalElapsedTime]
+    help: 'CPU usage by MSSQL'
+    values: [sql_process_utilization]
     query_file: 
-      ./config/mssql_collectors/sql/mssql_expensive_queries_by_duration.sql
+      ./config/mssql_collectors/sql/mssql_cpu_usage.sql
 
-  - metric_name: mssql_expensive_queries_by_cpu
+  - metric_name: mssql_cpu_usage_idle
     type: gauge
-    help: 'Expensive queries as reported by Performance Data CPU usage.'
-    key_labels:
-      - biExecutionCount
-      - xQueryText
-    values: [biAvgWorkerTime]
+    help: 'Idle CPU Usage'
+    values: [idle_process_utilization]
     query_file: 
-      ./config/mssql_collectors/sql/mssql_expensive_queries_by_cpu.sql
+      ./config/mssql_collectors/sql/mssql_cpu_usage.sql
 
-  - metric_name: mssql_expensive_queries_by_io
+  - metric_name: mssql_cpu_usage_other
     type: gauge
-    help: 'Expensive queries as reported by Performance Data IO usage.'
-    key_labels:
-      - biExecutionCount
-      - xQueryText
-    values: [biAvgIO]
+    help: 'Other (not SQL) CPU Usage'
+    values: [other_process_utilization]
     query_file: 
-      ./config/mssql_collectors/sql/mssql_expensive_queries_by_io.sql
+      ./config/mssql_collectors/sql/mssql_cpu_usage.sql
 
   - metric_name: mssql_batch_requests
     type: counter
