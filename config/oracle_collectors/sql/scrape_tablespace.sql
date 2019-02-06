@@ -1,26 +1,19 @@
-SELECT    
-    a.TABLESPACE_NAME AS "name",
-    a.BYTES AS "bytes_used",
-    b.BYTES AS "bytes_free",
-    a.bytes+b.bytes AS "max_bytes",
-    b.largest AS "largest_data_file",
-    round(((a.BYTES-b.BYTES)/a.BYTES)*100,2) percent_used
-FROM    
-    (
-        SELECT     
-            TABLESPACE_NAME,
-            sum(BYTES) BYTES
-        FROM     dba_data_files
-        GROUP     by TABLESPACE_NAME
-    )
-    a,
-    (
-        select     TABLESPACE_NAME,
-            sum(BYTES) BYTES ,
-            max(BYTES) largest
-        from     dba_free_space
-        group     by TABLESPACE_NAME
-    )
-    b
-WHERE     a.TABLESPACE_NAME=b.TABLESPACE_NAME
-ORDER     by ((a.BYTES-b.BYTES)/a.BYTES) desc;
+SELECT 
+  a.tablespace_name "name",
+  a.bytes "bytes_used",
+  b.bytes "bytes_free", 
+  a.bytes + b.bytes "max_bytes"
+FROM (
+	SELECT tablespace_name
+		,sum(BYTES) bytes
+	FROM dba_data_files
+	GROUP BY tablespace_name
+	) a
+	,(
+		SELECT tablespace_name
+			,sum(BYTES) bytes
+		FROM dba_free_space
+		GROUP BY tablespace_name
+		) b
+WHERE a.tablespace_name = b.tablespace_name
+ORDER BY ((a.bytes - b.bytes) / a.bytes) DESC
