@@ -15,7 +15,7 @@ global:
 target:
   # Data source name always has a URI schema that matches the driver name. In some cases (e.g. MySQL)
   # the schema gets dropped or replaced to match the driver expected DSN format.
-  data_source_name: "db2://DATABASE=LIVE;HOSTNAME=dkdl7805.dcsgomni.com;PORT=50001;PROTOCOL=TCPIP;UID=wscomusr;PWD=rsktRws7;"
+  data_source_name: "db2://DATABASE=LIVE;HOSTNAME=localhost;PORT=50001;PROTOCOL=TCPIP;UID=xxxx;PWD=xxxxx;"
 
   # Collectors (referenced by name) to execute on the target.
   collectors: [db2_metrics]
