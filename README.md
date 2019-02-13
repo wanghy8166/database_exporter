@@ -75,9 +75,7 @@ on already covered DBMSs.
 Oracle may require additional libraries to be installed on the machine running database_exporter. This can generally be done by installing Oracle Instand Client as found on the [`Oracle Website`](https://www.oracle.com/technetwork/database/database-technologies/instant-client/downloads/index.html)
 
 **`DB2`**
-DB2 install depends on the https://github.com/ibmdb/go_ibm_db driver, DSN format (passed to the driver with the `db2://`` prefix):
-db2://"DATABASE=database;HOSTNAME=hostname;PORT=port;PROTOCOL=TCPIP;UID=user;PWD=password;
-DB2 connection depends on db2cli which must be manually added. See directions located at https://github.com/ibmdb/go_ibm_db for installation. go_ibm_db2 lib may require CGO ignore on Linux/Macos systems eg. export GODEBUG=cgocheck=0
+DB2 install depends on the [`GO IBM Driver`](https://github.com/ibmdb/go_ibm_db) driver. This driver depends on db2cli which must be manually added. See README at [`GO IBM Driver`](https://github.com/ibmdb/go_ibm_db) for installation directions. Additionally, go_ibm_db2 lib may require CGO ignore on Linux/Macos systems for proper execution: export GODEBUG=cgocheck=0
 
 
 **`./database_exporter.yml`**
