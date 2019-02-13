@@ -79,6 +79,8 @@ import (
 // Using the https://github.com/ibmdb/go_ibm_db driver, DSN format (passed to the driver with the `db2://`` prefix):
 //   db2://"DATABASE=database;HOSTNAME=hostname;PORT=port;PROTOCOL=TCPIP;UID=user;PWD=password;
 //   DB2 connection depends on db2cli which must be manually added. See directions located at https://github.com/ibmdb/go_ibm_db for installation.
+//   DB2 connection may require CGO ignore on Linux/Macos systems
+//   eg. export GODEBUG=cgocheck=0
 //
 func OpenConnection(ctx context.Context, logContext, dsn string, maxConns, maxIdleConns int) (*sql.DB, error) {
 	// Extract driver name from DSN.

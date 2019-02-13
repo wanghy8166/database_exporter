@@ -76,8 +76,8 @@ Oracle may require additional libraries to be installed on the machine running d
 
 **`DB2`**
 DB2 install depends on the https://github.com/ibmdb/go_ibm_db driver, DSN format (passed to the driver with the `db2://`` prefix):
-   db2://"DATABASE=database;HOSTNAME=hostname;PORT=port;PROTOCOL=TCPIP;UID=user;PWD=password;
-   DB2 connection depends on db2cli which must be manually added. See directions located at https://github.com/ibmdb/go_ibm_db for installation.
+db2://"DATABASE=database;HOSTNAME=hostname;PORT=port;PROTOCOL=TCPIP;UID=user;PWD=password;
+DB2 connection depends on db2cli which must be manually added. See directions located at https://github.com/ibmdb/go_ibm_db for installation. go_ibm_db2 lib may require CGO ignore on Linux/Macos systems eg. export GODEBUG=cgocheck=0
 
 
 **`./database_exporter.yml`**
