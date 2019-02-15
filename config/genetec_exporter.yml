@@ -1,0 +1,15 @@
+# Global defaults.
+global:
+  scrape_timeout_offset: 500ms
+  min_interval: 0s
+  max_connections: 3
+  max_idle_connections: 3
+
+# The target to monitor and the collectors to execute on it.
+target:
+  data_source_name: "mysql://user:password@tcp(10.10.0.100:3306)/database"
+  collectors: [genetec_metrics]
+
+# Collector files specifies a list of globs. One collector definition is read from each matching file.
+collector_files: 
+  - "./mysql_collectors/genetec.collector.yml"

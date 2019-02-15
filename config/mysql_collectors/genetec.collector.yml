@@ -1,0 +1,23 @@
+# A collector defining standard metrics for MySQL Server.
+#
+#
+
+collector_name: genetec_metrics
+
+# Similar to global.min_interval, but applies to the queries defined by this collector only.
+#min_interval: 0s
+
+metrics:
+  - metric_name: genetec_health
+    type: gauge
+    help: 'Genetec Health Monitor.'
+    values:
+      - inactive
+    key_labels:
+      - servername
+      - name
+      - description
+      - macaddress
+    query_file: |
+      ./config/mysql_collectors/sql/genetec_monitor.sql
+
