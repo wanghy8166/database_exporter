@@ -5,3 +5,7 @@
 .DS_Store
 config/.DS_Store
 .vscode
+config.zip
+config/multi.mssql_exporter.yml
+database_exporter.exe
+run_test.py

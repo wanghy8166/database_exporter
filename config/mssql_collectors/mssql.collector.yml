@@ -169,6 +169,35 @@ metrics:
     values: [page_fault_count]
     query_ref: mssql_process_memory
 
+  - metric_name: mssql_expensive_queries_by_io_gauge
+    type: gauge
+    help: 'Expensive queries as reported by Performance Data.'
+    key_labels:
+      - vcOrderBy
+      - xQuerySnippet      
+    values: [biAvgIO]
+    query_file: 
+      ./config/mssql_collectors/sql/mssql_expensive_queries_by_io.sql
+
+  - metric_name: mssql_expensive_queries_by_cpu_gauge
+    type: gauge
+    help: 'Expensive queries as reported by Performance Data.'
+    key_labels:
+      - vcOrderBy
+      - xQuerySnippet
+    values: [biAvgWorkerTime]
+    query_file: 
+      ./config/mssql_collectors/sql/mssql_expensive_queries_by_cpu.sql
+
+  - metric_name: mssql_expensive_queries_by_duration_gauge
+    type: gauge
+    help: 'Expensive queries as reported by Performance Data.'
+    key_labels:
+      - vcOrderBy
+      - xQuerySnippet
+    values: [biAvgElapsedTime]
+    query_file: 
+      ./config/mssql_collectors/sql/mssql_expensive_queries_by_duration.sql
   #
   # Collected from sys.dm_os_sys_memory
   #

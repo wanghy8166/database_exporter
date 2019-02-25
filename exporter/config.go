@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"io/ioutil"
 	"path/filepath"
+	"regexp"
 	"strings"
 	"time"
 
@@ -341,6 +342,9 @@ func (c *CollectorConfig) UnmarshalYAML(unmarshal func(interface{}) error) error
 	// Set metric.query for all metrics: resolve query references (if any) and generate QueryConfigs for literal queries.
 	queries := make(map[string]*QueryConfig, len(c.Queries))
 	for _, query := range c.Queries {
+		//Replace ending semi-colons (PL/SQL workaround)
+		regexStr := regexp.MustCompile(".*;$")
+		query.Query = regexStr.ReplaceAllString(query.Query, "")
 		queries[query.Name] = query
 	}
 	for _, metric := range c.Metrics {
