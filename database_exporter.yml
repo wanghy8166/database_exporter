@@ -6,20 +6,23 @@ global:
   min_interval: 90s
   # Maximum number of open connections to any one target. Metric queries will run concurrently on multiple connections,
   # as will concurrent scrapes.
-  max_connections: 1
+  max_connections: 10
   # Maximum number of idle connections to any one target. Unless you use very long collection intervals, this should
   # always be the same as max_connections.
-  max_idle_connections: 1
+  max_idle_connections: 10
 
 # The target to monitor and the collectors to execute on it.
 target:
   # Data source name always has a URI schema that matches the driver name. In some cases (e.g. MySQL)
   # the schema gets dropped or replaced to match the driver expected DSN format.
-  data_source_name: "sqlserver://sa:P@55w0rd@0.0.0.0:1433"
+  # data_source_name: 'db2://DATABASE=LIVE;HOSTNAME=localhost;PORT=50001;PROTOCOL=TCPIP;UID=xxxx;PWD=xxxxx;'
+  #data_source_name: 'sqlserver://sa:P@55w0rd@0.0.0.0:1433'
+  data_source_name: "sqlserver://DKHM0837/SQLSTORE07"
+  # data_source_name: 'db2://DATABASE=AEOLUS;HOSTNAME=AEOLUS.dcsg.com;PORT=446;PROTOCOL=TCPIP;UID=DKS0408070;PWD=I8DA9PI8;'
 
   # Collectors (referenced by name) to execute on the target.
-  collectors: [mssql_metrics]
+  collectors: [dsg_mssql_metrics]
 
 # Collector files specifies a list of globs. One collector definition is read from each matching file.
 collector_files: 
-  - "./config/mssql_collectors/*.collector.yml"
+  - "./config/mssql_collectors/dsg.mssql.monitor.collector.yml"

@@ -1,0 +1,19 @@
+# A collector defining standard metrics for Oracle Database Server.
+#
+#
+
+collector_name: db2a_metrics
+
+# Similar to global.min_interval, but applies to the queries defined by this collector only.
+#min_interval: 0s
+
+metrics:
+  - metric_name: db2a_test_metric
+    type: gauge
+    help: 'db2 Test Metric'
+    values:
+      - purchaseOrderCount
+    key_labels:
+      - pwtype
+    query_file: |
+      ./config/db2_collectors/sql/ab_test.sql

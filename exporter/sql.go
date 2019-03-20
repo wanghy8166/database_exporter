@@ -117,6 +117,9 @@ func OpenConnection(ctx context.Context, logContext, dsn string, maxConns, maxId
 	)
 	go func() {
 		conn, err = sql.Open(driver, dsn)
+		if err != nil {
+			log.Infof("sql open log info: %s", err)
+		}
 		close(ch)
 	}()
 	select {
