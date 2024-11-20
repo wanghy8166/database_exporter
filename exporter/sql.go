@@ -85,7 +85,7 @@ func OpenConnection(ctx context.Context, logContext, dsn string, maxConns, maxId
 		dsn = strings.TrimPrefix(dsn, "mysql://")
 	case "oracle":
 		dsn = strings.TrimPrefix(dsn, "oracle://")
-		driver = "goracle"
+		driver = "godror"
 	case "sqlite3":
 		dsn = strings.TrimPrefix(dsn, "sqlite3://")
 	case "clickhouse":
